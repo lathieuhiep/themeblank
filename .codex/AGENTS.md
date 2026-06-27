@@ -5,12 +5,12 @@
 - Treat `wp-content` as the Git repository root.
 - Do not hard-code the local absolute path or drive letter in instructions, code, or documentation.
 - Custom project code is limited to:
-  - `themes/basictheme`
+  - `themes/themeblank`
   - `plugins/extend-site`
 
 ## Project Structure
 
-- Custom theme: `themes/basictheme`
+- Custom theme: `themes/themeblank`
 - Custom plugin: `plugins/extend-site`
 - Asset source root: `src/`
 - Theme asset source:
@@ -19,9 +19,9 @@
 - Plugin asset source:
   - `src/plugins/extend-site/scss`
   - `src/plugins/extend-site/js`
-- Built theme assets are output to `themes/basictheme/assets`.
+- Built theme assets are output to `themes/themeblank/assets`.
 - Built plugin assets are output to `plugins/extend-site/assets`.
-- Built WooCommerce theme assets are output to `themes/basictheme/includes/woocommerce/assets`.
+- Built WooCommerce theme assets are output to `themes/themeblank/includes/woocommerce/assets`.
 
 ## Plugin Architecture
 
@@ -36,14 +36,14 @@
 
 ## Theme Architecture
 
-- `themes/basictheme/functions.php` is the theme include manifest.
+- `themes/themeblank/functions.php` is the theme include manifest.
 - Keep theme setup in `includes/theme-setup.php`.
 - Keep theme hooks/filters in `includes/theme-hooks.php`.
 - Keep theme enqueue logic in `includes/theme-scripts.php`.
 - Keep theme sidebar/widget-area registration in `includes/theme-sidebar.php`.
 - Keep general theme helpers in `includes/theme-functions.php` and option-related helpers in `includes/theme-helper-options.php`.
 - Keep WooCommerce-specific theme logic under `includes/woocommerce`.
-- Theme text domain is `basictheme`; use it for theme strings.
+- Theme text domain is `themeblank`; use it for theme strings.
 - Do not move plugin-owned business logic into the theme unless the user approves it.
 
 ## Restricted Areas
@@ -76,7 +76,7 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 
 - Avoid heavy full-repository scans.
 - Prefer narrow searches scoped to the relevant custom paths:
-  - `themes/basictheme`
+  - `themes/themeblank`
   - `plugins/extend-site`
   - `src`
 - Use targeted filename, class name, function name, or text searches instead of broad recursive reads.
@@ -87,7 +87,7 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 ## WordPress Rules
 
 - Follow the existing project style first, while staying aligned with WordPress Coding Standards.
-- Use the text domain `basictheme` for translation functions.
+- Use the text domain `themeblank` for translation functions.
 - Escape all output with the appropriate WordPress escaping function, such as:
   - `esc_html()`
   - `esc_attr()`
@@ -114,15 +114,15 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
   - Expose typed public getter methods for reading values.
   - Use `self::get()` from `OptionBase` so missing Carbon Fields functions and empty values fall back safely.
 - Register new option modules through `ThemeOptions` by adding them to the appropriate group/tab structure.
-- Theme templates should read theme option data through module getter methods, preferably via `basictheme_opt(SomeOptions::class)::some_getter()`.
-- Use `basictheme_opt()` when theme code depends on option classes from `extend-site`, so the theme does not fatal if the plugin/class is unavailable.
+- Theme templates should read theme option data through module getter methods, preferably via `themeblank_opt(SomeOptions::class)::some_getter()`.
+- Use `themeblank_opt()` when theme code depends on option classes from `extend-site`, so the theme does not fatal if the plugin/class is unavailable.
 - Template or post-specific fields are registered under `plugins/extend-site/includes/Admin/Fields`.
 - Field tab classes should follow the existing pattern:
   - Implement `ExtendSite\Admin\Fields\FieldTabIF`.
   - Define Carbon Fields keys as private class constants with a stable prefix.
   - Return field definitions from `fields(): array`.
   - Expose `get_data(int $post_id): array` for template consumption.
-- Theme code should use `basictheme_get_field_tab_data(FieldTab::class, $post_id)` to read field-tab data safely.
+- Theme code should use `themeblank_get_field_tab_data(FieldTab::class, $post_id)` to read field-tab data safely.
 - Keep raw `carbon_get_theme_option()` and `carbon_get_post_meta()` calls inside option/field classes when possible, not scattered through templates.
 - Always escape option/meta values at output time in templates.
 - Use defaults in getter methods instead of handling missing option values repeatedly in templates.
@@ -149,11 +149,11 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 
 ## Enqueue And Assets
 
-- Theme frontend assets are enqueued in `themes/basictheme/includes/theme-scripts.php`.
+- Theme frontend assets are enqueued in `themes/themeblank/includes/theme-scripts.php`.
 - Plugin frontend/login/admin assets are enqueued in `plugins/extend-site/includes/Core/Enqueue.php`.
-- WooCommerce theme assets are enqueued in `themes/basictheme/includes/woocommerce/woo-scripts.php`.
+- WooCommerce theme assets are enqueued in `themes/themeblank/includes/woocommerce/woo-scripts.php`.
 - Use existing handles and version helpers where possible:
-  - Theme assets use `basictheme_get_version_theme()`.
+  - Theme assets use `themeblank_get_version_theme()`.
   - Plugin assets use `Config::VERSION`.
 - Register/enqueue assets conditionally when they are page-specific.
 - Use `wp_localize_script()` only for data needed by scripts, such as AJAX URLs or configuration.
@@ -172,7 +172,7 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 
 ## WooCommerce And Theme Hooks
 
-- WooCommerce theme customization lives in `themes/basictheme/includes/woocommerce`.
+- WooCommerce theme customization lives in `themes/themeblank/includes/woocommerce`.
 - Prefer WooCommerce hooks/filters and existing hook files over copying WooCommerce templates.
 - Keep WooCommerce template functions in `woo-template-functions.php` and hook registrations in `woo-template-hooks.php`.
 - Keep WooCommerce helper functions in `woo-helpers.php`.

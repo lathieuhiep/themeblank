@@ -55,6 +55,8 @@ Do not edit the following unless the user explicitly asks for it:
 - Vendor/package code
 - `node_modules/`
 - Carbon Fields core
+- `themes/themeblank/languages/`
+- `plugins/extend-site/languages/`
 
 Before scanning or modifying Node-related files/folders or Carbon Fields core, ask the user first unless the user already approved that specific action.
 

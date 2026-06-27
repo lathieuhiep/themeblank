@@ -189,14 +189,6 @@ const pluginEsBuildStyleCustomLogin = () => {
     })
 }
 
-/** Task build style addons */
-const pluginEsBuildStyleAddons = () => {
-    return buildScssPipeline({
-        input: `${pathPluginES.input.scss}addons-elementor.scss`,
-        output: `${pathPluginES.output.css}frontend/`
-    })
-}
-
 /** Task build js plugin extend site */
 const pluginEsBuildJs = () => {
     return buildJsPipeline({
@@ -222,17 +214,6 @@ const pluginEsWatchAll = () => {
     watch([
         `${pathPluginES.input.scss}custom-login.scss`
     ], pluginEsBuildStyleCustomLogin)
-
-    // watch style addons-elementor
-    watch([
-        `${pathPluginES.input.scss}abstracts/*.scss`,
-        `${pathPluginES.input.scss}base/*.scss`,
-        `${pathPluginES.input.scss}components/*.scss`,
-        `${pathPluginES.input.scss}addons/*.scss`,
-        `${pathPluginES.input.scss}addons-elementor.scss`
-    ], gulp.series(
-        pluginEsBuildStyleAddons
-    ))
 
     // watch js
     watchChangedEntry([
@@ -428,7 +409,6 @@ const buildProject = async () => {
     // Build plugin assets in parallel.
     await Promise.all([
         pluginEsBuildStyleCustomLogin(),
-        pluginEsBuildStyleAddons(),
         pluginEsBuildJs(),
     ]);
 

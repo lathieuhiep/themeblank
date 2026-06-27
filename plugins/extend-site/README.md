@@ -1,13 +1,12 @@
 # Extend Site Plugin Framework
 
-A modular WordPress plugin framework for custom content types, Carbon Fields options, Elementor integrations, templates, and utility features.
+A modular WordPress plugin framework for custom content types, Carbon Fields options, templates, and utility features.
 
 ## Folder Structure
 
 - `includes/Core`: Plugin lifecycle, autoloader, Carbon Fields loading, and asset enqueueing.
 - `includes/Admin`: Admin pages, theme options, Carbon Fields field definitions, and helpers.
 - `includes/PostType`: Custom post type registration and template routing.
-- `includes/ElementorAddon`: Elementor widget integration.
 - `includes/Helpers`: Shared plugin helper functions.
 - `templates`: Default plugin templates that can be overridden by the active theme.
 

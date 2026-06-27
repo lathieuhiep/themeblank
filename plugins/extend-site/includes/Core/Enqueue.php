@@ -2,7 +2,6 @@
 namespace ExtendSite\Core;
 
 use ExtendSite\Constants\Config;
-use ExtendSite\Helpers\ESHelpers;
 use ExtendSite\PostType\PortfolioPostType;
 
 defined('ABSPATH') || exit;
@@ -43,26 +42,6 @@ class Enqueue
      */
     public static function enqueue_scripts_frontend(): void
     {
-        // Check if Elementor is used to build the current page
-        $page_builder = ESHelpers::check_elementor_builder();
-
-        if ( $page_builder ) {
-            // load frontend style
-            wp_enqueue_style('es-addons-elementor',
-                Config::$url . 'assets/css/frontend/addons-elementor.min.css',
-                [],
-                Config::VERSION
-            );
-
-            // load frontend script
-            wp_register_script( 'es-addons-elementor',
-                Config::$url . 'assets/js/frontend/addons-elementor.min.js',
-                array( 'jquery', 'swiper' ),
-                Config::VERSION,
-                true
-            );
-        }
-
         if ( is_singular(PortfolioPostType::SLUG) ) {
             // load portfolio style
             wp_enqueue_style('es-single-portfolio',

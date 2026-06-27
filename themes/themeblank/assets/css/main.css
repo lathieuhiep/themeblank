@@ -189,9 +189,6 @@ form.wpcf7-form p:has(.wpcf7-submit) {
   --theme-pd-site-container: 5rem 0;
   padding: var(--theme-pd-site-container);
 }
-.site-container.site-container-elementor {
-  --theme-pd-site-container: 0;
-}
 
 .site-page-content p::after {
   display: table;

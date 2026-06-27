@@ -53,10 +53,6 @@
   --#{$prefix-theme}pd-site-container: 5rem 0;
 
   padding: var(--#{$prefix-theme}pd-site-container);
-
-  &.site-container-elementor {
-    --#{$prefix-theme}pd-site-container: 0;
-  }
 }
 
 .site-page-content {

@@ -1,6 +1,6 @@
 === Extend Site ===
 Contributors: your-wporg-username
-Tags: cpt, widgets, addons, features
+Tags: cpt, widgets, features
 Requires at least: 6.0
 Tested up to: 6.6
 Stable tag: 1.0.0

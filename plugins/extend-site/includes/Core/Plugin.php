@@ -5,7 +5,6 @@ namespace ExtendSite\Core;
 use ExtendSite\Admin\AdminManager\AdminManager;
 use ExtendSite\Admin\Options\ThemeOptions;
 use ExtendSite\Constants\Config;
-use ExtendSite\ElementorAddon\ElementorAddon;
 use ExtendSite\PostType\PostTypeManager;
 
 defined('ABSPATH') || exit;
@@ -28,9 +27,6 @@ class Plugin
 
         // Load asset enqueuing
         Enqueue::boot();
-
-        // Load Elementor addon
-        ElementorAddon::boot();
 
         // Load custom post types
         PostTypeManager::load();

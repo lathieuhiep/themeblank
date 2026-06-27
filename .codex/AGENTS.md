@@ -155,11 +155,8 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 - Register/enqueue assets conditionally when they are page-specific.
 - Use `wp_localize_script()` only for data needed by scripts, such as AJAX URLs or configuration.
 
-## Elementor, Admin Modules, And Breadcrumbs
+## Admin Modules And Breadcrumbs
 
-- Elementor addon code lives in `plugins/extend-site/includes/ElementorAddon`.
-- New Elementor widgets should be added under `ElementorAddon/Widgets` and registered in `ElementorAddon::register_widgets()`.
-- Reuse existing Elementor traits/base helpers before creating new widget infrastructure.
 - Admin framework code lives in `plugins/extend-site/includes/Admin/AdminManager`.
 - New admin pages/modules should extend `BaseAdminModule` and be added to `AdminManager::get_modules()`.
 - Admin modules must keep nonce and capability checks through the existing `BaseAdminModule` request flow unless a custom flow is required.

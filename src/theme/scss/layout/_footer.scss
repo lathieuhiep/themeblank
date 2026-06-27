@@ -1,0 +1,14 @@
+@import "../abstracts/abstracts";
+
+.footer {
+  &__column {
+    border-top: .1rem solid color(primary);
+    padding: 3rem 0;
+  }
+
+  &__bottom {
+    padding: 1rem 0;
+    color: color(white);
+    background-color: color(black);
+  }
+}

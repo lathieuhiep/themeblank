@@ -1,0 +1,19 @@
+// var color function
+@function color($key) {
+  @return var(--#{$prefix-theme}#{$key});
+}
+
+// var font-size function
+@function fs($key) {
+  @return var(--#{$prefix-theme}fs-#{$key});
+}
+
+// var font-family function
+@function ff($key) {
+  @return var(--#{$prefix-theme}ff-#{$key});
+}
+
+// var font-weight function
+@function fw($key) {
+  @return var(--#{$prefix-theme}fw-#{$key});
+}

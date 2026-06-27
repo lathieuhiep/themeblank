@@ -1,0 +1,48 @@
+@import "../abstracts/abstracts";
+
+// list icon
+$icon-theme-names: (
+        bars
+        calendar-days
+        cart-plus
+        cart-shopping
+        chevron-down
+        chevron-right
+        chevron-up
+        facebook-f
+        instagram
+        linkedin-in
+        location-dot
+        magnifying-glass
+        minus
+        paper-plane
+        phone
+        plus
+        tiktok
+        twitter
+        xmark
+        youtube
+);
+
+.icon-theme-mask {
+  --#{$prefix-theme}icon-theme-width: 1.6rem;
+  --#{$prefix-theme}icon-theme-height: 1.6rem;
+  --#{$prefix-theme}icon-theme-color: currentColor;
+
+  display: inline-block;
+  width: var(--#{$prefix-theme}icon-theme-width);
+  height: var(--#{$prefix-theme}icon-theme-height);
+  background-color: var(--#{$prefix-theme}icon-theme-color);
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+
+  @each $name in $icon-theme-names {
+    &-#{$name} {
+      @include mask-image("#{$icon-path-theme}/#{$name}.svg");
+    }
+  }
+}

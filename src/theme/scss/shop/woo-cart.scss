@@ -1,0 +1,24 @@
+@import "../abstracts/abstracts";
+@import "components/product-quantity";
+
+.woocommerce-cart {
+  table {
+    &.shop_table {
+      td {
+        &.product-quantity {
+          .quantity {
+            @extend %product-quantity;
+          }
+        }
+
+        &.actions {
+          .coupon {
+            .input-text {
+              width: auto;
+            }
+          }
+        }
+      }
+    }
+  }
+}

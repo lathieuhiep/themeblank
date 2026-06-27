@@ -1,0 +1,92 @@
+@use "sass:map";
+
+$prefix-theme: theme-;
+$icon-path-theme: "../images/icons";
+
+// breakpoints
+$mt-breakpoints: (
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px
+);
+
+// color
+$mt-colors: (
+        "primary": #3498db,
+        "secondary": #2ecc71,
+        "accent": #e74c3c,
+        "success": #28a745,
+        "error": #dc3545,
+        "warning": #ffc107,
+        "info": #17a2b8,
+        "black": #000000,
+        "white": #ffffff
+);
+
+// typography
+$fs-base: 1.4rem;
+
+$mt-font-sizes: (
+        xs: 1.2rem,
+        sm: $fs-base,
+        md: 1.6rem,
+        lg: 2rem,
+        xl: 2.4rem,
+        xxl: 2.8rem,
+        3xl: 3.2rem
+);
+
+// font family
+$mt-fonts: (
+        base: '"Inter", sans-serif',
+        heading: '"Roboto Condensed", sans-serif'
+);
+
+// font-weights
+$mt-font-weights: (
+        regular: 400,
+        medium: 500,
+        bold: 700
+);
+
+$line-height-base: 1.5;
+$line-height-heading: 1.25;
+
+// spacing
+$spacing-base: 0.4rem;
+
+$spacers: ();
+@for $i from 0 through 8 {
+  $spacers: map.merge($spacers, (#{$i}: $spacing-base * $i));
+}
+
+// body
+$color-required: #ff5555;
+
+// headings variables
+$headings-margin-bottom: $spacing-base * 3;
+$headings-line-height: $line-height-heading;
+
+// FontAwesome
+$font-awesome-free: "Font Awesome 6 Free", serif;
+$font-awesome-brand: "Font Awesome 6 Brands", serif;
+
+// Paragraphs
+//
+// Style p element.
+$paragraph-margin-bottom: $spacing-base * 3;
+
+// others
+$transition-base: all 0.4s ease-in-out;
+
+// Grid columns
+$grid-columns: 12;
+$grid-gutter-width: $spacing-base * 6;
+
+// border
+$border-width: .1rem;
+$border-style: solid;
+$border-color: #ddd;
+$border-radius: .4rem;

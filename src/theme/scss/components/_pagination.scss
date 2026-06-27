@@ -1,0 +1,33 @@
+@import "../abstracts/abstracts";
+
+.pagination {
+  display: block;
+  float: none;
+  text-align: center;
+  margin-top: var(--#{$prefix-theme}spacing-6);
+}
+
+.page-numbers {
+  @include reset-list();
+
+  li {
+    display: inline-block;
+
+    span,
+    a {
+      display: block;
+      cursor: pointer;
+      @include border();
+      padding: var(--#{$prefix-theme}spacing-1) var(--#{$prefix-theme}spacing-3);
+      position: relative;
+      @include border-radius();
+    }
+
+    span.current,
+    a:hover {
+      background: color(accent);
+      border-color: color(accent);
+      color: color(white);
+    }
+  }
+}

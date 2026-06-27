@@ -1,0 +1,14 @@
+@import "../abstracts/abstracts";
+
+.social-network-item {
+  display: inline-block;
+
+  a {
+    display: block;
+    color: color(black);
+
+    &:hover {
+      color: color(accent);
+    }
+  }
+}

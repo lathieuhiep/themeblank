@@ -1,0 +1,36 @@
+# Bỏ qua tất cả các tệp trong wp-content
+*
+
+# Bỏ qua các tệp không cần thiết khác
+/node_modules
+package-lock.json
+.env
+
+# Loại trừ phần phát triển
+!plugins/
+!plugins/essential-features-addon/
+!plugins/essential-features-addon/**
+
+!plugins/efa-product-ux/
+!plugins/efa-product-ux/**
+
+!plugins/simple-user-crm/
+!plugins/simple-user-crm/**
+
+!plugins/extend-site/
+!plugins/extend-site/**
+
+!themes/
+!themes/basictheme/
+!themes/basictheme/**
+
+!src/
+!src/**
+
+!.codex/
+!.codex/AGENTS.md
+
+!.gitignore
+!gulpfile.js
+!package.json
+!README.md

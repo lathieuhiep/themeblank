@@ -22,7 +22,7 @@ const isDev = (process.env.NODE_ENV === 'development');
 
 // BrowserSync server proxy.
 // Set PROXY in .env to override the local development URL.
-const proxy = process.env.PROXY || "localhost/basictheme";
+const proxy = process.env.PROXY || "localhost/themeblank";
 
 const server = () => {
     browserSync.init({
@@ -225,7 +225,7 @@ const pluginEsWatchAll = () => {
  * Build vendors
  * ---------------------------
  */
-const themeName = 'basictheme';
+const themeName = 'themeblank';
 
 // function make vendor paths
 const makeVendorPaths = (slug) => {

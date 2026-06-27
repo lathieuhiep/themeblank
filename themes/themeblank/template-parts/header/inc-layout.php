@@ -12,7 +12,5 @@ $sticky_menu = themeblank_opt(HeaderOptions::class)::get_position_fixed_menu() ?
         <!-- Main menu -->
         <?php get_template_part('template-parts/header/parts/inc', 'nav'); ?>
 
-        <!-- Main shopping cart -->
-        <?php get_template_part('template-parts/header/parts/inc', 'shopping-cart'); ?>
     </nav>
 </header>

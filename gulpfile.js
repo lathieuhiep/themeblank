@@ -16,12 +16,12 @@ const path = require('path');
 
 require('dotenv').config()
 
-// setting NODE_ENV: development or production
-// NODE_ENV="development" trong file .env để chạy ở chế độ phát triển (có sourcemap)
+// Set NODE_ENV to development or production.
+// Use NODE_ENV="development" in .env to enable development mode with sourcemaps.
 const isDev = (process.env.NODE_ENV === 'development');
 
-// server
-// tạo file .env với biến PROXY="localhost/basictheme". Có thể thay đổi giá trị này.
+// BrowserSync server proxy.
+// Set PROXY in .env to override the local development URL.
 const proxy = process.env.PROXY || "localhost/basictheme";
 
 const server = () => {
@@ -103,14 +103,14 @@ const watchChangedEntry = (globs, task) => {
 
 // function buildWebpackPipeline
 const buildWebpackPipeline = ({ input, output, filename, entries }) => {
-    // Cấu hình Webpack cơ bản, được tái sử dụng
+    // Shared Webpack configuration.
     const webpackConfig = {
         mode: 'production',
         output: {
-            // Sử dụng entries để đặt tên file nếu có, hoặc filename nếu chỉ là 1 file
+            // Use entry names when multiple entries are provided.
             filename: entries ? '[name].min.js' : filename,
         },
-        entry: entries || input, // Sử dụng entries nếu có, nếu không dùng input
+        entry: entries || input,
         module: {
             rules: [
                 {
@@ -304,10 +304,6 @@ const makeThemePaths = () => {
         output: {
             css: `${dist}/css/`,
             js: `${dist}/js/`
-        },
-        woo: {
-            css: `themes/${themeName}/includes/woocommerce/assets/css/`,
-            js: `themes/${themeName}/includes/woocommerce/assets/js/`
         }
     };
 }
@@ -341,7 +337,7 @@ const buildStylePageTemplate = () => {
 
 /** Task build js theme */
 const buildJSTheme = () => {
-    // danh sách entry (nhiều file đầu ra)
+    // Build an entry map for multiple theme JS outputs.
     const entries = glob.sync(`${pathTheme.input.js}*.js`).reduce((result, file) => {
         const name = path.basename(file, '.js');
         result[name] = './' + file.replace(/\\/g, '/');
@@ -367,44 +363,6 @@ const buildJSThemeFile = (filePath) => {
         }
     });
 }
-
-/** Task build style shop */
-const buildStyleShop = () => {
-    return buildScssPipeline({
-        input: `${pathTheme.input.scss}shop/*.scss`,
-        output: `${pathTheme.woo.css}`
-    })
-}
-
-/** Task build js shop */
-const buildJSShop = () => {
-    // Vẫn cần glob để tạo danh sách entry (nhiều file đầu ra)
-    const entries = glob.sync(`${pathTheme.input.js}shop/*.js`).reduce((result, file) => {
-        const name = path.basename(file, '.js');
-        result[name] = './' + file.replace(/\\/g, '/');
-        return result;
-    }, {});
-
-    return buildWebpackPipeline({
-        input: `${pathTheme.input.js}shop/*.js`,
-        output: `${pathTheme.woo.js}`,
-        entries: entries
-    });
-}
-
-/** Task build changed js shop entry */
-const buildJSShopFile = (filePath) => {
-    const name = path.basename(filePath, '.js');
-
-    return buildWebpackPipeline({
-        input: normalizePath(filePath),
-        output: `${pathTheme.woo.js}`,
-        entries: {
-            [name]: getWebpackEntryPath(filePath)
-        }
-    });
-}
-
 /** Task build changed custom post type style entry */
 const buildStyleCustomPostTypeFile = (filePath) => {
     if (isScssPartial(filePath)) {
@@ -430,20 +388,6 @@ const buildStylePageTemplateFile = (filePath) => {
         outputRoot: `${pathTheme.output.css}page-templates/`
     });
 }
-
-/** Task build changed shop style entry */
-const buildStyleShopFile = (filePath) => {
-    if (isScssPartial(filePath)) {
-        return buildStyleShop();
-    }
-
-    return buildScssEntryFile({
-        filePath,
-        sourceRoot: `${pathTheme.input.scss}shop/`,
-        outputRoot: `${pathTheme.woo.css}`
-    });
-}
-
 /** Watch Shared build style */
 const buildWatchAbstracts = () => {
     watch([
@@ -453,7 +397,6 @@ const buildWatchAbstracts = () => {
         buildStyleTheme,
         buildStyleCustomPostType,
         buildStylePageTemplate,
-        buildStyleShop
     ))
 }
 
@@ -475,49 +418,31 @@ const themeWatchAll = () => {
         `${pathTheme.input.scss}page-templates/*.scss`
     ], buildStylePageTemplateFile)
 
-    watchChangedEntry([
-        `${pathTheme.input.scss}shop/components/*.scss`,
-        `${pathTheme.input.scss}shop/*.scss`
-    ], buildStyleShopFile)
-
     watchChangedEntry([`${pathTheme.input.js}*.js`], buildJSThemeFile)
-
-    watchChangedEntry([
-        `${pathTheme.input.js}shop/components/*.js`,
-        `${pathTheme.input.js}shop/*.js`
-    ], (filePath) => {
-        if (normalizePath(filePath).includes('/components/')) {
-            return buildJSShop();
-        }
-
-        return buildJSShopFile(filePath);
-    })
 }
 
 /*
 Task build project
 * */
 const buildProject = async () => {
-    // Chạy các plugin styles song song
+    // Build plugin assets in parallel.
     await Promise.all([
         pluginEsBuildStyleCustomLogin(),
         pluginEsBuildStyleAddons(),
         pluginEsBuildJs(),
     ]);
 
-    // Chạy vendors style và các theme styles/JS song song
+    // Build vendor and theme assets in parallel.
     await Promise.all([
         buildStyleCustomBootstrap(),
         buildStyleTheme(),
         buildStyleCustomPostType(),
         buildStylePageTemplate(),
-        buildStyleShop(),
         buildJSCustomBootstrap(),
         buildJSTheme(),
-        buildJSShop(),
     ]);
 
-    console.log("Dự án đã được xây dựng hoàn tất!");
+    console.log("Project build completed.");
 }
 exports.buildProject = buildProject
 

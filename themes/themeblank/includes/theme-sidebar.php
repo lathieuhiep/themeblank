@@ -13,38 +13,22 @@ function themeblank_register_sidebar( $name, $id, $description = '' ): void {
 }
 
 const PREFIX_SIDEBAR_FOOTER_COLUMN = 'sidebar-footer-column-';
+
 function themeblank_multiple_widget_init(): void {
-    // sidebar main
 	themeblank_register_sidebar(
-        esc_html__( 'Sidebar chính', 'themeblank' ),
-        'sidebar-main',
-        esc_html__('Dùng ở các trang bài viết', 'themeblank' )
-    );
+		esc_html__( 'Sidebar chính', 'themeblank' ),
+		'sidebar-main',
+		esc_html__( 'Dùng ở các trang bài viết', 'themeblank' )
+	);
 
-    // sidebar woo
-    if ( class_exists( 'Woocommerce' ) ) :
-        themeblank_register_sidebar(
-            esc_html__( 'Sidebar shop', 'themeblank' ),
-            'sidebar-wc',
-            esc_html__( 'Dùng ở trang danh mục sản phẩm.', 'themeblank' )
-        );
-
-        themeblank_register_sidebar(
-            esc_html__( 'Sidebar sản phẩm', 'themeblank' ),
-            'sidebar-wc-product',
-            esc_html__( 'Dùng cho trang chi tiết sản phẩm', 'themeblank' )
-        );
-    endif;
-
-	// sidebar footer
 	$opt_number_columns = themeblank_get_footer_sidebar_columns_count();
 
-	for ( $i = 1; $i <= $opt_number_columns; $i ++ ) {
+	for ( $i = 1; $i <= $opt_number_columns; $i++ ) {
 		themeblank_register_sidebar(
-            sprintf( esc_html__( 'Sidebar chân trang cột %d', 'themeblank' ), $i ),
-            PREFIX_SIDEBAR_FOOTER_COLUMN . $i,
+			sprintf( esc_html__( 'Sidebar chân trang cột %d', 'themeblank' ), $i ),
+			PREFIX_SIDEBAR_FOOTER_COLUMN . $i,
 			esc_html__( 'Dùng ở chân trang', 'themeblank' )
-        );
+		);
 	}
 }
 add_action( 'widgets_init', 'themeblank_multiple_widget_init' );

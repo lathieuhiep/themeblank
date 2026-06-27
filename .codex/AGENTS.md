@@ -21,7 +21,6 @@
   - `src/plugins/extend-site/js`
 - Built theme assets are output to `themes/themeblank/assets`.
 - Built plugin assets are output to `plugins/extend-site/assets`.
-- Built WooCommerce theme assets are output to `themes/themeblank/includes/woocommerce/assets`.
 
 ## Plugin Architecture
 
@@ -42,7 +41,6 @@
 - Keep theme enqueue logic in `includes/theme-scripts.php`.
 - Keep theme sidebar/widget-area registration in `includes/theme-sidebar.php`.
 - Keep general theme helpers in `includes/theme-functions.php` and option-related helpers in `includes/theme-helper-options.php`.
-- Keep WooCommerce-specific theme logic under `includes/woocommerce`.
 - Theme text domain is `themeblank`; use it for theme strings.
 - Do not move plugin-owned business logic into the theme unless the user approves it.
 
@@ -151,7 +149,6 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 
 - Theme frontend assets are enqueued in `themes/themeblank/includes/theme-scripts.php`.
 - Plugin frontend/login/admin assets are enqueued in `plugins/extend-site/includes/Core/Enqueue.php`.
-- WooCommerce theme assets are enqueued in `themes/themeblank/includes/woocommerce/woo-scripts.php`.
 - Use existing handles and version helpers where possible:
   - Theme assets use `themeblank_get_version_theme()`.
   - Plugin assets use `Config::VERSION`.
@@ -170,13 +167,8 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 - Breadcrumb behavior is controlled by the admin module and booted through `Plugin::boot_breadcrumb()`.
 - Do not add duplicate breadcrumb renderers, shortcodes, or schema output outside the breadcrumb subsystem.
 
-## WooCommerce And Theme Hooks
+## Theme Hooks
 
-- WooCommerce theme customization lives in `themes/themeblank/includes/woocommerce`.
-- Prefer WooCommerce hooks/filters and existing hook files over copying WooCommerce templates.
-- Keep WooCommerce template functions in `woo-template-functions.php` and hook registrations in `woo-template-hooks.php`.
-- Keep WooCommerce helper functions in `woo-helpers.php`.
-- Keep quick-view behavior in the existing quick-view files unless the user asks for a new architecture.
 - Theme hooks and optimization filters belong in `theme-hooks.php`.
 - Code insertion options are intentionally rendered in theme hooks; treat them as trusted admin-configured HTML and avoid applying generic escaping that would break their purpose unless the user requests stricter filtering.
 
@@ -192,7 +184,7 @@ Before scanning or modifying Node-related files/folders or Carbon Fields core, a
 - Ask the user before editing built/minified output files when the source file exists.
 - For theme frontend work, use `src/theme/scss` and `src/theme/js`.
 - For `extend-site` plugin frontend work, use `src/plugins/extend-site/scss` and `src/plugins/extend-site/js`.
-- Keep the existing SCSS partial structure, such as `abstracts`, `base`, `components`, `layout`, `utilities`, `shop`, `page-templates`, and `post-type`.
+- Keep the existing SCSS partial structure, such as `abstracts`, `base`, `components`, `layout`, `utilities`, `page-templates`, and `post-type`.
 - Reuse existing SCSS variables, mixins, functions, placeholders, and helpers before introducing new ones.
 - Keep JavaScript consistent with the existing jQuery/plain JavaScript style.
 - Do not add a new frontend framework or major dependency unless the user approves it first.
